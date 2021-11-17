@@ -12,7 +12,7 @@ class IndexController extends Controller {
     
     public function indexAction() {
         $currency = new CurrencyModel();
-        var_dump($currency->showData());
-        $this->render("index",["jeden" => "dfsddfs","dwa" => "dfdsfd"]);
+        //var_dump($currency->showData());
+        $this->render("index",["currencyData" => $currency->showData(),"dwa" => "dfdsfd"]);
     }
 }
