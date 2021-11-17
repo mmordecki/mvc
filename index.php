@@ -19,6 +19,9 @@ spl_autoload_register(function ($class_name) {
     if($path[1] == "Model") {
         include $_SERVER['DOCUMENT_ROOT'] . $ds ."app". $ds ."models" . $ds . $path[2] . '.php';
     }
+    if($path[1] == "Helper") {
+        include $_SERVER['DOCUMENT_ROOT'] . $ds ."app". $ds ."helpers" . $ds . $path[2] . '.php';
+    }
 });
 
 if($_SERVER['REQUEST_URI'] == "/") {
@@ -31,8 +34,14 @@ if($_SERVER['REQUEST_URI'] == "/") {
     if(!isset($path[2])) {
         $controller->indexAction();
     }else {
+        $urlargument = new App\Helper\UrlArguments();
+        $args = $urlargument->getArgumentFromUrl($path);
         $action = $path[2]."Action";
-        $controller->$action();
+        if(count($args) == 0) {
+            $controller->$action();
+        }else {
+            $controller->$action($args);
+        }
     }
     //var_dump($path);
 }

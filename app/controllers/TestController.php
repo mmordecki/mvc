@@ -9,6 +9,6 @@ class TestController extends Controller {
     }
     
     public function indexAction() {
-        $this->render("index",array("dfsddfs","dfdsfd"));
+        $this->render("index",["dfsddfs","dfdsfd"]);
     }
 }

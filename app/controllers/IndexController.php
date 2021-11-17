@@ -15,4 +15,9 @@ class IndexController extends Controller {
         //var_dump($currency->showData());
         $this->render("index",["currencyData" => $currency->showData(),"dwa" => "dfdsfd"]);
     }
+    
+    public function productAction(array $id = array()) {
+        //var_dump($id);
+        $this->render("product",["id" => $id["id"]]);
+    }
 }
