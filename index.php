@@ -1,5 +1,6 @@
 <?php
 //use App\Controller\IndexController;
+require __DIR__."/config/Url.php";
 
 echo $_SERVER['DOCUMENT_ROOT']."<br />\n";
 echo $_SERVER['REQUEST_URI']."<br />\n";
@@ -23,7 +24,34 @@ spl_autoload_register(function ($class_name) {
         include $_SERVER['DOCUMENT_ROOT'] . $ds ."app". $ds ."helpers" . $ds . $path[2] . '.php';
     }
 });
-
+$uri = $_SERVER['REQUEST_URI'];
+$path = App\Helper\UrlManager::reverseUrl($uri);
+echo "<br />\n".$uri." $path<br />\n";
+$path = explode("/",$path);
+//var_dump($path);
+$classname = "App\\Controller\\".ucfirst($path[0])."Controller";
+//echo $classname."<br />\n";
+$controller = new $classname();
+if(!isset($path[1])) {
+    $controller->indexAction();
+}else {
+    $action = $path[1]."Action";
+    $controller->$action();
+}
+//$_GET['my_value'] = 'test';
+//echo "my value: ".$_GET['my_value'];
+/*
+if($_SERVER['REQUEST_URI'] == "/") {
+    $queryurl = "/";
+    $path = App\Helper\UrlManager::reverseUrl($queryurl);
+    echo "path: $path";
+    $classname = "App\\Controller\\".ucfirst($path[1])."Controller";
+    $controller = new $classname();
+}else {
+    
+}
+*/
+/*
 if($_SERVER['REQUEST_URI'] == "/") {
     $index = new App\Controller\IndexController();
     $index->indexAction();
@@ -45,3 +73,4 @@ if($_SERVER['REQUEST_URI'] == "/") {
     }
     //var_dump($path);
 }
+*/
