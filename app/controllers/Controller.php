@@ -4,14 +4,14 @@ namespace App\Controller;
 
 class Controller {
     
-    protected $layout = "layout.php";
+    protected $layout = "layout";
     
     public function __construct(){
         
     }
     
     protected function showLayout($content) {
-        require_once "views".DIRECTORY_SEPARATOR."layouts".DIRECTORY_SEPARATOR.$this->layout;
+        require_once "views".DIRECTORY_SEPARATOR."layouts".DIRECTORY_SEPARATOR.$this->layout.".php";
     }
     
     public function render($filename, $data="") {
